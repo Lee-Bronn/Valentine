@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Question</title>
+    <style>
+        body {
+            background-color: #fff0f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 75, 110, 0.2);
+            z-index: 10;
+        }
+
+        h1 {
+            color: #ff4b6e;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.2rem;
+        }
+
+        .buttons {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #ff4b6e;
+            color: white;
+        }
+
+        #yesBtn:hover {
+            background-color: #e6395b;
+            transform: scale(1.1);
+        }
+
+        #noBtn {
+            background-color: #ccc;
+            color: white;
+            position: relative;
+        }
+
+        /* The "Floating Hearts" background */
+        .heart {
+            position: absolute;
+            color: #ffb3c1;
+            font-size: 20px;
+            top: -20px;
+            user-select: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="content">
+            <h1>Will you be my Valentine? 🌹</h1>
+            <p>I was thinking of someone amazing today, and naturally, I thought of you.</p>
+            <div class="buttons">
+                <button id="yesBtn" onclick="celebrate()">Yes!</button>
+                <button id="noBtn" onmouseover="moveButton()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Make the "No" button dodge the mouse
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            
+            btn.style.position = 'absolute';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        // What happens when they click Yes
+        function celebrate() {
+            const container = document.querySelector('.container');
+            container.innerHTML = `
+                <h1>Yay! ❤️</h1>
+                <p>You just made my day. Can't wait!</p>
+                <div style="font-size: 50px;">🥰✨🌹</div>
+            `;
+            
+            // Start heart rain
+            setInterval(createHeart, 300);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
